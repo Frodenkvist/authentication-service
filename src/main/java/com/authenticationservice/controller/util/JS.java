@@ -1,4 +1,4 @@
-package com.fruktkorg.controller.util;
+package com.authenticationservice.controller.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
