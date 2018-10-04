@@ -19,4 +19,11 @@ public class PersonService {
         return personRepository.findPersonByPersonnummer(personnummer).orElseThrow(() ->
                 new PersonMissingException("Unable to find person with personnummer: " + personnummer, personnummer));
     }
+
+    public void deletePerson(String personnummer) throws PersonMissingException {
+        Long rowsDeleted = personRepository.deletePersonByPersonnummer(personnummer);
+        if(rowsDeleted < 1L) {
+            throw new PersonMissingException("Unable to find person with personnummer: " + personnummer, personnummer);
+        }
+    }
 }

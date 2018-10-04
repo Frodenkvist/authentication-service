@@ -1,0 +1,2 @@
+ALTER TABLE permission DROP CONSTRAINT permission_personnummer_fkey;
+ALTER TABLE permission ADD CONSTRAINT permission_personnummer_fkey FOREIGN KEY (personnummer) REFERENCES person (personnummer) ON DELETE CASCADE;

@@ -29,6 +29,17 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue authenticationPersonDeleteQueue() {
+        return new Queue("authenticationPersonDeleteQueue");
+    }
+
+    @Bean
+    public Binding bindingPersonDeleted(DirectExchange personExchange, Queue authenticationPersonDeleteQueue) {
+        return BindingBuilder.bind(authenticationPersonDeleteQueue).to(personExchange)
+                .with(RabbitMQRouting.Person.DELETE);
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter jacksonConverter() {
         return new Jackson2JsonMessageConverter();
     }
