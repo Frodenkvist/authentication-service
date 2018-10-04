@@ -37,9 +37,9 @@ public class AuthenticationController {
     @ResponseBody
     public ResponseEntity<?> addPermission(@RequestBody @Valid PermissionDTO input) {
         try {
-            return JS.message(HttpStatus.OK, permissionService.createPermission(input.getPersonnummer(), input.getPermission()));
+            return JSON.message(HttpStatus.OK, permissionService.createPermission(input.getPersonnummer(), input.getPermission()));
         } catch (PersonMissingException e) {
-            return JS.message(HttpStatus.NOT_FOUND, "Unable to find person with personnummer: " + input.getPersonnummer());
+            return JSON.message(HttpStatus.NOT_FOUND, "Unable to find person with personnummer: " + input.getPersonnummer());
         }
     }
 
@@ -48,9 +48,9 @@ public class AuthenticationController {
     public ResponseEntity<?> deletePermission(@PathVariable String personnummer, @PathVariable PermissionName permissionName) {
         try {
             permissionService.deletePermission(personnummer, permissionName);
-            return JS.message(HttpStatus.OK, "Permission deleted");
+            return JSON.message(HttpStatus.OK, "Permission deleted");
         } catch (PermissionMissingException e) {
-            return JS.message(HttpStatus.NOT_FOUND, "Unable to find permission with name: " + permissionName.name());
+            return JSON.message(HttpStatus.NOT_FOUND, "Unable to find permission with name: " + permissionName.name());
         }
     }
 }
