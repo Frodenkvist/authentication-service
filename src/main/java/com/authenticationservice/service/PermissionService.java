@@ -28,7 +28,7 @@ public class PermissionService {
     }
 
     public void deletePermission(String personnummer, PermissionName permissionName) throws PermissionMissingException {
-        Long rowsDeleted = permissionRepository.deletePermissionByPersonnummerAndName(personnummer, permissionName);
+        Long rowsDeleted = permissionRepository.deletePermissionByPersonAndName(personnummer, permissionName);
 
         if(rowsDeleted < 1L) {
             throw new PermissionMissingException("Unable to find permisison: " + permissionName.name());
