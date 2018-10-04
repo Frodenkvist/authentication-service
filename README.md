@@ -2,4 +2,4 @@ For this repo you need to have postgres installed and create an user (if it does
 
 `create role -U postgres fruktmannen`
 
-`createdb -U postgres -O fruktmannen fruktkorg_permission_service`
+`createdb -U postgres -O fruktmannen fruktkorg_authentication_service`
