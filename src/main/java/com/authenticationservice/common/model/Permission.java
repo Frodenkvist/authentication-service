@@ -19,8 +19,9 @@ public class Permission {
     @Column(name = "permission_id", updatable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
-    private String name;
+    private PermissionName name;
 
     @ManyToOne
     @JsonBackReference
