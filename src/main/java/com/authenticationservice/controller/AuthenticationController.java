@@ -1,8 +1,8 @@
 package com.authenticationservice.controller;
 
 import com.authenticationservice.common.exception.PersonMissingException;
-import com.authenticationservice.controller.util.JS;
 import com.authenticationservice.service.PersonService;
+import com.common.util.JS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
