@@ -6,7 +6,7 @@ import com.authenticationservice.common.model.PermissionName;
 import com.authenticationservice.controller.model.PermissionDTO;
 import com.authenticationservice.service.PermissionService;
 import com.authenticationservice.service.PersonService;
-import com.common.util.JS;
+import com.common.util.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +27,9 @@ public class AuthenticationController {
     @ResponseBody
     public ResponseEntity<?> getPermissions(@PathVariable String personnummer) {
         try {
-            return JS.message(HttpStatus.OK, personService.getPerson(personnummer).getPermissions());
+            return JSON.message(HttpStatus.OK, personService.getPerson(personnummer).getPermissions());
         } catch (PersonMissingException e) {
-            return JS.message(HttpStatus.NOT_FOUND, "Unable to find person with personnummer: " + personnummer);
+            return JSON.message(HttpStatus.NOT_FOUND, "Unable to find person with personnummer: " + personnummer);
         }
     }
 
