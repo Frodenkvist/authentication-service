@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -47,8 +48,32 @@ public class PermissionRepositoryTest {
         permission3.setPerson(person);
         entityManager.persist(permission3);
 
-        int deletedRows = permissionRepository.deletePermissionByPersonnummerAndName(person.getPersonnummer(), PermissionName.CREATE);
+        int deletedRows = permissionRepository.deletePermissionByPersonnummerAndName(permission2.getPerson().getPersonnummer(), permission2.getName());
+
+        entityManager.detach(permission2);
 
         assertEquals(1, deletedRows);
+        assertNull(entityManager.find(Permission.class, permission2.getId()));
+    }
+
+    @Test
+    public void deleteMissingPermissionByPersonAndName() {
+        Person person = new Person("19900101-0001", Collections.emptyList());
+
+        entityManager.persist(person);
+
+        Permission permission1 = new Permission();
+        permission1.setName(PermissionName.SEARCH);
+        permission1.setPerson(person);
+        entityManager.persist(permission1);
+
+        Permission permission2 = new Permission();
+        permission2.setName(PermissionName.SYSADMIN);
+        permission2.setPerson(person);
+        entityManager.persist(permission2);
+
+        int deletedRows = permissionRepository.deletePermissionByPersonnummerAndName(person.getPersonnummer(), PermissionName.CREATE);
+
+        assertEquals(0, deletedRows);
     }
 }

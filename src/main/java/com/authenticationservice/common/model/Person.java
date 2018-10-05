@@ -21,4 +21,13 @@ public class Person {
     @JsonManagedReference
     @OneToMany(mappedBy = "person")
     private List<Permission> permissions;
+
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Person)) {
+            return false;
+        }
+
+        return personnummer.equals(((Person)other).personnummer);
+    }
 }

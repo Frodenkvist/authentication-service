@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -21,10 +22,20 @@ public class Permission {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
+    @Type(type = "com.authenticationservice.common.model.PermissionName")
     private PermissionName name;
 
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "personnummer")
     private Person person;
+
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof Permission)) {
+            return false;
+        }
+
+        return id.equals(((Permission)other).id);
+    }
 }
